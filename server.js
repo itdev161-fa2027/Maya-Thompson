@@ -15,7 +15,7 @@ app.use(express.json());
 
 //API endpoints
 /*
-GET
+GET REQUEST
 */
 app.get('/', (req, res) =>
     res.send('http get request sent to root api endpoint')
