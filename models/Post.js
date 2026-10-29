@@ -17,7 +17,7 @@ const PostSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    createdDate: {
+    createDate: {
         type: Date,
         default: Date.now,
     },

@@ -7,6 +7,9 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 import auth from './middleware/auth.js';
+//cors is middleware that tells the browser that the API can accept
+//requests from other origins
+import cors from 'cors';
 
 //Load environment variables
 dotenv.config();
@@ -14,9 +17,11 @@ dotenv.config();
 //Intialize express application
 const app = express();
 
-
 //Connect to the database
 connectDatabase();
+
+//Enable CORS
+app.use(cors());
 
 //Configure Middleware
 app.use(express.json());
@@ -79,7 +84,7 @@ app.post('/api/users',[
                 jwt.sign (
                     payload,
                     process.env.JWT_SECRET,
-                    { expiresIn: '1h'},
+                    { expiresIn: '1h' },
                     (err, token) => {
                         if (err) throw err;
                         res.json({
@@ -194,8 +199,8 @@ app.get('/api/posts/:id', async (req, res) => {
 app.post ('/api/posts', 
     [
         auth,
-        check('title', 'Title is required').not().isEmpty,
-        check('body', 'Body is required').not().isEmpty,
+        check('title', 'Title is required').not().isEmpty(),
+        check('body', 'Body is required').not().isEmpty(),
     ],
     async (req, res) => {
         const errors = validationResult(req);
@@ -229,8 +234,8 @@ app.post ('/api/posts',
 app.put('/api/posts/:id',
     [
         auth,
-        check('title', 'Title is required').not().isEmpty,
-        check('body', 'Body is required').not().isEmpty,
+        check('title', 'Title is required').not().isEmpty(),
+        check('body', 'Body is required').not().isEmpty(),
     ],
     async (req, res) => {
         const errors = validationResult(req);
@@ -283,7 +288,6 @@ app.delete('/api/posts/:id', auth, async (req, res) => {
         }
 
         await Post.findByIdAndDelete(req.params.id);
-// my code
         res.json({msg: 'Post removed'});
     } catch (error){
             console.error(error.message);
