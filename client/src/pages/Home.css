@@ -10,8 +10,34 @@
 
 .home-header h1 {
   color: #282c34;
-  margin: 0 0 0.5rem;
+   margin: 0;
+ }
+
+ .create-post-container {
+  margin-top: 1.5rem;
+ }
+
+ .create-post-button {
+   padding: 0.75rem 1.5rem;
+   background-color: #61dafb;
+   color: #282c34;
+   border-radius: 4px;
+   font-size: 1rem;
+   font-weight: 600;
+   text-decoration: none;
+   transition: background-color 0.3s;
+ }
+
+ .create-post-button:hover {
+   background-color: #21a1c4;
   }
+
+  .auth-message {
+    color: #666;
+    font-size: 1rem;
+    margin: 0;
+  }
+
 
  .auth-message {
    color: #666;
